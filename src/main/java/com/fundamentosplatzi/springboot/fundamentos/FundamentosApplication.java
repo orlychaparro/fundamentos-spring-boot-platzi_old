@@ -7,9 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.fundamentosplatzi.springboot.fundamentos.bean.MyBean;
 import com.fundamentosplatzi.springboot.fundamentos.bean.MyBeanWithDependency;
-
+import com.fundamentosplatzi.springboot.fundamentos.bean.MyBeanWithProperties;
 import com.fundamentosplatzi.springboot.fundamentos.component.ComponentDependency;
 import com.fundamentosplatzi.springboot.fundamentos.custom.MyCustomDependency;
+import com.fundamentosplatzi.springboot.fundamentos.pojo.UserPojo;
 
 @SpringBootApplication
 public class FundamentosApplication implements CommandLineRunner {
@@ -21,12 +22,18 @@ public class FundamentosApplication implements CommandLineRunner {
 	
 	private MyBeanWithDependency myBeanWithDependency;
 	private MyCustomDependency myCustomDependency;
+	private MyBeanWithProperties myBeanWithProperties;
+	private UserPojo userPojo;
 	
-	public FundamentosApplication(@Qualifier("componetTwoImplement") ComponentDependency componentDependency, MyBean myBean, MyBeanWithDependency myBeanWithDependency, MyCustomDependency myCustomDependency) {
+	public FundamentosApplication(@Qualifier("componetTwoImplement") ComponentDependency componentDependency, MyBean myBean,
+			                                  MyBeanWithDependency myBeanWithDependency, MyCustomDependency myCustomDependency, 
+			                                  MyBeanWithProperties myBeanWithProperties,UserPojo userPojo) {
 		this.componentDependency = componentDependency;
 		this.myBean = myBean;
 		this.myBeanWithDependency = myBeanWithDependency;
 		this.myCustomDependency = myCustomDependency;
+		this.myBeanWithProperties = myBeanWithProperties;
+		this.userPojo = userPojo;
 	}
 
 	public static void main(String[] args) {
@@ -40,6 +47,8 @@ public class FundamentosApplication implements CommandLineRunner {
 		myBean.print();
 		myBeanWithDependency.printWithDependency();
 		myCustomDependency.ImprimeCustomDependency();
+		System.out.println(myBeanWithProperties.function());
+		System.out.println("email: "+ userPojo.getEmail() + ", pass: " + userPojo.getPassword() + " ,edad: "+ userPojo.getAge());
 	}
 
 }
