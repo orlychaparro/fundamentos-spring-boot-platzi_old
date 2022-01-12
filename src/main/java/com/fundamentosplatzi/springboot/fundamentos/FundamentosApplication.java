@@ -1,5 +1,8 @@
 package com.fundamentosplatzi.springboot.fundamentos;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +18,7 @@ import com.fundamentosplatzi.springboot.fundamentos.pojo.UserPojo;
 @SpringBootApplication
 public class FundamentosApplication implements CommandLineRunner {
 	
+	private final Log LOGGER = LogFactory.getLog(FundamentosApplication.class);
 	
 	private ComponentDependency componentDependency;
 	private MyBean myBean;
@@ -49,6 +53,16 @@ public class FundamentosApplication implements CommandLineRunner {
 		myCustomDependency.ImprimeCustomDependency();
 		System.out.println(myBeanWithProperties.function());
 		System.out.println("email: "+ userPojo.getEmail() + ", pass: " + userPojo.getPassword() + " ,edad: "+ userPojo.getAge());
+		try {
+			//error
+			int value = 10/0;
+			
+		}catch (Exception e){
+			LOGGER.error("Error:" + e);	
+			LOGGER.error("Error:" + e.getStackTrace());	
+		}
+		
+		
 	}
 
 }
