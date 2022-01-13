@@ -1,9 +1,10 @@
 package com.fundamentosplatzi.springboot.fundamentos;
 
-import java.time.DayOfWeek;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -58,7 +59,7 @@ public class FundamentosApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
 		// TODO Auto-generated method stub
-		ejemplosAnteriores();	
+		//ejemplosAnteriores();	
 		saveUsersInDatabase();
 		getInformationJpqlFromUser();
 
@@ -66,6 +67,8 @@ public class FundamentosApplication implements CommandLineRunner {
 	
 	private void getInformationJpqlFromUser() {
 		//userRepository.findByUserEmail("juan2@gmail.com");
+	/*
+		
 		LOGGER.info("El usuario con el metodo findByUserEmail : " + 
 				userRepository.findByUserEmail("Juan2@gmail.com")
 			   .orElseThrow(()-> new RuntimeException("No se encontro el usuario")));
@@ -73,19 +76,52 @@ public class FundamentosApplication implements CommandLineRunner {
 	userRepository.findandSort("Juan", Sort.by("id").descending())
 				  .stream()
 				  .forEach(user-> LOGGER.info("Usuario con metodo sort " + user));
+	
+	userRepository.findByName("JuanJose")
+		.stream()
+		.forEach(user -> LOGGER.info("Usuario con query Method = " + user));
+	
+	
+	LOGGER.info("Usuario con query Method findByEmailAndName = " + userRepository.findByEmailAndName("juan1@gmail.com","Juan1")
+		.orElseThrow(()-> new RuntimeException("Usuario x no encontrado")));
+	
+	
+	userRepository.findByNameLike("%ose%")
+		.stream()
+		.forEach(user -> LOGGER.info("Usuario finByNameLike " + user));
+	
+	userRepository.findByNameOrEmail("Pedro","Juan7@gmail.com")
+	.stream()
+	.forEach(user -> LOGGER.info("Usuario indByNameOrEmail " + user));
+	
+	
+	LocalDate.of(1975, 02, 01),LocalDate.of(1975, 02, 01)
+	
+*/
+	userRepository.findByBirthdateBetween(LocalDate.of(1975, 02, 2), LocalDate.of(1975, 02, 4))
+		.stream()
+		.forEach(user -> LOGGER.info("Usuario findByBirthdateBetween Intervalo de fechas" + user));
+	
+	userRepository.findByNameLikeOrderByIdDesc("%Ped%")
+	.stream()
+	.forEach(user -> LOGGER.info("Usuario findByNameLikeOrderByIdDesc like y ordenado" + user));
+	
+	userRepository.findByNameContainingOrderByIdDesc("edro")
+	.stream()
+	.forEach(user -> LOGGER.info("Usuario findByNameContainingOrderByIdDesc containing" + user));
 		
-		
+	
 	}
 	
 	private void saveUsersInDatabase() {
 		User user1 = new User("Juan1", "juan1@gmail.com", LocalDate.of(1975,02,1));
-		User user2 = new User("Juan2", "Juan2@gmail.com", LocalDate.of(1975,02,2));
+		User user2 = new User("JuanJose", "Juan2@gmail.com", LocalDate.of(1975,02,2));
 		User user3 = new User("Juan3", "Juan3@gmail.com", LocalDate.of(1975,02,3));
-		User user4 = new User("Juan4", "Juan4@gmail.com", LocalDate.of(1975,02,4));
-		User user5 = new User("Juan5", "Juan5@gmail.com", LocalDate.of(1975,02,5));
+		User user4 = new User("Pedro", "ppena@gmail.com", LocalDate.of(1975,02,4));
+		User user5 = new User("JuanJose", "Juan5@gmail.com", LocalDate.of(1975,02,5));
 		User user6 = new User("Juan6", "Juan6@gmail.com", LocalDate.of(1975,02,6));
 		User user7 = new User("Juan7", "Juan7@gmail.com", LocalDate.of(1975,02,7));
-		User user8 = new User("Juan8", "Juan8@gmail.com", LocalDate.of(1975,02,8));
+		User user8 = new User("JuanJose", "Juan8@gmail.com", LocalDate.of(1975,02,8));
 		User user9 = new User("Juan9", "Juan9@gmail.com", LocalDate.of(1975,02,9));
 		User user10 = new User("Juan10", "Juan10@gmail.com", LocalDate.of(1975,02,10));
 		User user11 = new User("Juan11", "Juan11@gmail.com", LocalDate.of(1975,02,11));

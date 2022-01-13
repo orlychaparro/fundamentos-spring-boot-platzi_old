@@ -1,5 +1,6 @@
 package com.fundamentosplatzi.springboot.fundamentos.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,21 @@ public interface UserRepository extends JpaRepository<User, Long>{
 	
 	@Query("SELECT u from User u where u.name like ?1%")
 	List<User> findandSort(String name, Sort sort);
+	
+	List<User> findByName(String name);
+	
+	
+	Optional<User> findByEmailAndName(String email, String name);
+	
+	List<User> findByNameLike(String name);
+	
+	List<User> findByNameOrEmail(String name,String email);
+	
+	List<User> findByBirthdateBetween(LocalDate begin, LocalDate end);
+	
+	List<User> findByNameLikeOrderByIdDesc(String name);
+	
+	List<User> findByNameContainingOrderByIdDesc(String name);
 	
 
 }

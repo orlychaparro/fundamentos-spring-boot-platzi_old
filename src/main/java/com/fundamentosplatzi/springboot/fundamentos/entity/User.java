@@ -35,7 +35,7 @@ public class User {
     	
     }
 
-	public User(String name, String email, LocalDate bithdate) {
+	public User(String name, String email, LocalDate birthdate) {
 		super();
 		this.name = name;
 		this.email = email;
