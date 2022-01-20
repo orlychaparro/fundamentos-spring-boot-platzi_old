@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.List;
@@ -20,13 +21,14 @@ public class User {
 	
 	@Column(length = 50)
 	private String name;
-	@Column(length = 50)
+	@Column(length = 50, unique = true)
 	private String email;
 
 	private LocalDate birthdate;
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JsonManagedReference
+	@JsonIgnore
 	private List<Post> posts = new ArrayList<>();
 
 
@@ -40,6 +42,11 @@ public class User {
 		this.name = name;
 		this.email = email;
 		this.birthdate = birthdate;
+	}
+
+	public User(Long id) {
+		// TODO Auto-generated constructor stub
+		this.id = id;
 	}
 
 	public Long getId() {
